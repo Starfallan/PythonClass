@@ -16,6 +16,18 @@ def generate_chinese_name():
     
     return random.choice(surnames) + random.choice(names)
 
+# 在全局变量中存储生成过的姓名
+generated_names = set()
+
+# 封装一个获取唯一姓名的函数，但保持调用时不需要参数
+def get_unique_name():
+    global generated_names
+    while True:
+        name = generate_chinese_name()
+        if name not in generated_names:
+            generated_names.add(name)
+            return name
+
 # 生成Excel文件的函数
 def generate_excel_files():
     # 创建保存目录
@@ -29,7 +41,7 @@ def generate_excel_files():
     for i in range(1, 25):
         group1_data.append({
             '编号': f'G1-H1-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(67.6, np.sqrt(4.28))),
             '血压级别': 1
@@ -39,7 +51,7 @@ def generate_excel_files():
     for i in range(1, 10):
         group1_data.append({
             '编号': f'G1-H2-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(67.6, np.sqrt(4.28))),
             '血压级别': 2
@@ -48,7 +60,7 @@ def generate_excel_files():
     # 3级高血压 (1人)
     group1_data.append({
         '编号': 'G1-H3-01',
-        '姓名': generate_chinese_name(),
+        '姓名': get_unique_name(),
         '性别': random.choice(['男', '女']),
         '年龄': int(np.random.normal(67.6, np.sqrt(4.28))),
         '血压级别': 3
@@ -58,7 +70,7 @@ def generate_excel_files():
     for i in range(1, 16):
         group1_data.append({
             '编号': f'G1-N-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(67.6, np.sqrt(4.28))),
             '血压级别': 4  # 4表示正常高值
@@ -71,7 +83,7 @@ def generate_excel_files():
     for i in range(1, 24):
         group2_data.append({
             '编号': f'G2-H1-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(66.36, np.sqrt(3.03))),
             '血压级别': 1
@@ -81,7 +93,7 @@ def generate_excel_files():
     for i in range(1, 9):
         group2_data.append({
             '编号': f'G2-H2-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(66.36, np.sqrt(3.03))),
             '血压级别': 2
@@ -91,7 +103,7 @@ def generate_excel_files():
     for i in range(1, 3):
         group2_data.append({
             '编号': f'G2-H3-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(66.36, np.sqrt(3.03))),
             '血压级别': 3
@@ -101,7 +113,7 @@ def generate_excel_files():
     for i in range(1, 17):
         group2_data.append({
             '编号': f'G2-N-{i:02d}',
-            '姓名': generate_chinese_name(),
+            '姓名': get_unique_name(),
             '性别': random.choice(['男', '女']),
             '年龄': int(np.random.normal(66.36, np.sqrt(3.03))),
             '血压级别': 4  # 4表示正常高值
@@ -125,6 +137,7 @@ def generate_excel_files():
     
     print(f"Excel文件已成功生成，保存在: {save_path}")
     print(f"第一组: {len(group1_data)}人，第二组: {len(group2_data)}人")
+    print(f"共生成 {len(generated_names)} 个唯一名字")
 
 # 执行数据生成函数
 if __name__ == "__main__":
