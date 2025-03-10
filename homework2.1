@@ -1,0 +1,75 @@
+# 1、猜拳游戏：
+# 用户输入石头、剪刀或布，电脑也会出一个招，要求得出最终结
+# 果，显示胜利玩家。
+# 提示1：用数字代表猜拳
+#  提示2：使用条件判断语句
+#  提示3：
+# import random
+# random.randint(m,n )为取m-n随机整数的方法
+# 2、输入三个整数x,y,z，请把这三个数由小到大输出。
+# 3、依次输入三角形的三边长，判断能否生成一个三角形。
+# 4、依次输入三角形的三边长，判断能否生成一个等腰三角形。
+# 5、依次输入三角形的三边长，判断能否生成一个直角三角形。\
+
+#1.猜拳游戏
+def rock_paper_scissors():
+    choices = ["石头", "剪刀", "布"]
+    user_choice = input("请输入 石头、剪刀 或 布: ")
+    computer_choice = random.choice(choices)
+    print(f"电脑出的是: {computer_choice}")
+    
+    if user_choice == computer_choice:
+        print("平局")
+    elif (user_choice == "石头" and computer_choice == "剪刀") or \
+         (user_choice == "剪刀" and computer_choice == "布") or \
+         (user_choice == "布" and computer_choice == "石头"):
+        print("你赢了")
+    else:
+        print("你输了")
+
+# 2. 输入三个整数x,y,z，请把这三个数由小到大输出。
+def sort_three_numbers():
+    x = int(input("请输入第一个整数: "))
+    y = int(input("请输入第二个整数: "))
+    z = int(input("请输入第三个整数: "))
+    numbers = [x, y, z]
+    numbers.sort()
+    print("排序后的结果是:", numbers)
+
+# 3. 依次输入三角形的三边长，判断能否生成一个三角形。
+def is_triangle():
+    a = float(input("请输入第一条边: "))
+    b = float(input("请输入第二条边: "))
+    c = float(input("请输入第三条边: "))
+    if a + b > c and a + c > b and b + c > a:
+        print("可以构成三角形")
+    else:
+        print("不能构成三角形")
+
+# 4. 依次输入三角形的三边长，判断能否生成一个等腰三角形。
+def is_isosceles_triangle():
+    a = float(input("请输入第一条边: "))
+    b = float(input("请输入第二条边: "))
+    c = float(input("请输入第三条边: "))
+    if a == b or b == c or a == c:
+        print("可以构成等腰三角形")
+    else:
+        print("不能构成等腰三角形")
+
+# 5. 依次输入三角形的三边长，判断能否生成一个直角三角形。
+def is_right_triangle():
+    a = float(input("请输入第一条边: "))
+    b = float(input("请输入第二条边: "))
+    c = float(input("请输入第三条边: "))
+    sides = sorted([a, b, c])
+    if sides[0]**2 + sides[1]**2 == sides[2]**2:
+        print("可以构成直角三角形")
+    else:
+        print("不能构成直角三角形")
+
+# 调用函数进行测试
+rock_paper_scissors()
+sort_three_numbers()
+is_triangle()
+is_isosceles_triangle()
+is_right_triangle()
